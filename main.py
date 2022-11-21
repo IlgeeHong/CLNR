@@ -7,9 +7,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import pandas as pd
 
-#from statistics import mean, stdev
-# from ogb.nodeproppred import PygNodePropPredDataset
-
 from torch_geometric.datasets import Planetoid, Coauthor, Amazon
 import torch_geometric.transforms as T
 

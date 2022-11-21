@@ -77,10 +77,6 @@ class Model(nn.Module):
         # Encode the graph
         h1 = self.backbone(data1.x, data1.edge_index)
         h2 = self.backbone(data2.x, data2.edge_index)
-        # Batch norm projection head
-        # z1 = (h1 - h1.mean(0)) / h1.std(0)
-        # z2 = (h2 - h2.mean(0)) / h2.std(0)
-        # return z1, z2
         return h1, h2
         
     def projection(self, z):
@@ -114,8 +110,6 @@ class Model(nn.Module):
         h2 = self.projection(z2)
         l1 = self.semi_loss(h1, h2)
         l2 = self.semi_loss(h2, h1)
-        # l1 = self.semi_loss(z1, z2)
-        # l2 = self.semi_loss(z2, z1)
         ret = (l1 + l2) * 0.5
         ret = ret.mean() if mean else ret.sum()
         return ret
